@@ -26,7 +26,11 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify(createdTodo));
       } catch (err) {
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: err.message }));
+        res.end(JSON.stringify({ 
+          status: 500,
+          success: false,
+          error: err.message 
+        }));
       }
     });
   } else if (pathName === "/update" && req.method === "PUT") {
@@ -49,7 +53,11 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify(updatedTodo));
       } catch (err) {
         res.writeHead(404, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: err.message }));
+        res.end(JSON.stringify({ 
+          status: 404,
+          success: false,
+          error: err.message 
+        }));
       }
     });
   } else if (pathName === "/delete" && req.method === "DELETE") {
